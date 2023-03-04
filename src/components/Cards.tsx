@@ -7,7 +7,7 @@ import Product from "../types/Product";
 export const CardsContainer: FunctionComponent = function () {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:8000/products')
+    axios.get('https://pebinhaserver.up.railway.app/products')
       .then(response => {
         setProducts(response.data);
       })
