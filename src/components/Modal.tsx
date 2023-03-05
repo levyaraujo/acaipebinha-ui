@@ -1,8 +1,9 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, ReactNode, useState } from "react";
 import { Name, Description, Price, AddtoCart } from "./styles/styles";
-import { SizeButton } from "./SizeButton";
+import { Size } from "./styles/SizeButton";
 import * as S from "./styles/ModalStyles";
-import { AiFillCloseSquare } from "react-icons/all";
+import { ValueButton, ValueInput, Container } from "./styles/IncreaseButton";
+import { AiFillCloseSquare, AiOutlinePlus, AiOutlineMinus, BsBagPlusFill, MdLocalHospital } from "react-icons/all";
 import { IKContext, IKImage } from "imagekitio-react";
 
 interface ModalProps {
@@ -11,7 +12,7 @@ interface ModalProps {
   title: string;
   description: string;
   img: any;
-  size: number[];
+  sizes: number[];
   price: number[];
 }
 
@@ -27,12 +28,82 @@ export const ModalBackground: FunctionComponent<BackgroundProps> = function ({ c
       </S.ModalBackground>
     );
   }
-
   return null;
 
 };
 
-export const Modal: FunctionComponent<ModalProps> = function ({ isOpen, title, description, closeModal, img, size, price }) {
+interface FooterProps {
+  sizes: number[];
+  price: number[];
+}
+
+const Footer: FunctionComponent<FooterProps> = function ({ sizes, price }) {
+  const [value, setValue] = useState(1);
+  const selectedPrice = localStorage.getItem('price');
+  const [size, setSize] = useState(sizes[1]);
+  const [total, setTotal] = useState(Number(price[1] * value));
+
+  const handleTotal = () => {
+    setTotal(Number(Number(selectedPrice) * value));
+  };
+
+  const handleSize = (size: number) => {
+    setSize(size);
+  };
+
+  const handleIncrease = () => {
+    setValue(value + 1);
+  };
+
+  const handleDecrease = () => {
+    if (value > 0)
+      setValue(value - 1);
+  };
+
+  const handleInputChange = (event: any) => {
+    setValue(parseInt(event.target.value));
+  };
+
+  console.log(total);
+
+  return (
+    <S.ModalFooter >
+      <S.Title>
+        Escolha o tamanho:
+      </S.Title>
+      <p></p>
+      <Size onClick={() => { handleSize(sizes[0]); localStorage.setItem('price', `${price[0]}`); }}>
+        {sizes[0]} ml
+      </Size>
+      <Size onClick={() => { handleSize(sizes[1]); localStorage.setItem('price', `${price[1]}`); }}>
+        {sizes[1]} ml
+      </Size>
+      <Size onClick={() => { handleSize(sizes[2]); localStorage.setItem('price', `${price[2]}`); }}>
+        {sizes[2]} ml
+      </Size>
+
+      <Container>
+        <ValueButton onClick={() => { handleDecrease(); handleTotal(); }}>
+          <AiOutlineMinus size={10} />
+        </ValueButton>
+        <ValueInput type="number" value={value} onChange={handleInputChange}>
+        </ValueInput>
+        <ValueButton onClick={() => { handleIncrease(); }}>
+          <AiOutlinePlus size={10} />
+        </ValueButton>
+      </Container>
+
+      <S.AddtoCart>
+        <S.Price>
+          R$ {total}, 00
+        </S.Price>
+        <BsBagPlusFill size={15} />
+      </S.AddtoCart>
+    </S.ModalFooter >
+  );
+};
+
+export const Modal: FunctionComponent<ModalProps> = function ({ isOpen, title, description, closeModal, img, sizes, price }) {
   const UrlEndpoint = 'https://ik.imagekit.io/levyaraujo';
   if (isOpen === true) {
     return (
@@ -58,23 +129,9 @@ export const Modal: FunctionComponent<ModalProps> = function ({ isOpen, title, d
             {description}
           </Description>
         </S.ModalBody>
-        <S.ModalFooter>
-          <S.Title>
-            Escolha o tamanho:
-          </S.Title>
-          <p></p>
-          <SizeButton size={size[0]} />
-          <SizeButton size={size[1]} />
-          <SizeButton size={size[2]} />
-
-        </S.ModalFooter>
-        <AddtoCart>
-          <S.Price>
-            R$ {price[1]}, 00
-          </S.Price>
-        </AddtoCart>
+        <Footer sizes={sizes} price={price} />
         <S.CloseButton>
-          <AiFillCloseSquare size={20} onClick={closeModal} color="#4E41D9" />
+          <AiFillCloseSquare size={20} onClick={closeModal} color="#fff" />
         </S.CloseButton>
       </S.ModalContainer >
     );

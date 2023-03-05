@@ -7,7 +7,7 @@ interface ButtonProps {
 
 export const SizeButton: FunctionComponent<ButtonProps> = function ({ size }) {
   return (
-    <Size>
+    <Size onClick={() => console.log(size)}>
       {size} ml
     </Size>
   );

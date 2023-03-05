@@ -30,21 +30,6 @@ interface FooterProps {
 
 export const CardContainer: FunctionComponent<CardProps> = function ({ name, description, sizes, prices, ingredients, image }) {
   const [isOpen, setOpenModal] = useState(false);
-  const [imageUrl, setImageUrl] = useState('');
-  // useEffect(() => {
-  //   axios.get(`${UrlEndpoint}/${image}`, { responseType: 'arraybuffer' })
-  //     .then(response => {
-  //       response.headers['cache-control'] = 'max-age: 31536000';
-  //       const blob = new Blob([response.data], { type: response.headers['content-type'] });
-  //       const url = URL.createObjectURL(blob);
-  //       setImageUrl(url);
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // }, []);
-
-  console.log(isOpen);
 
   function openModal() {
     setOpenModal(true);
@@ -53,8 +38,7 @@ export const CardContainer: FunctionComponent<CardProps> = function ({ name, des
   function closeModal() {
     setOpenModal(false);
   }
-
-  console.log(imageUrl);
+  ;
   return (
     <>
       <Card onClick={() => openModal()}>
@@ -63,7 +47,7 @@ export const CardContainer: FunctionComponent<CardProps> = function ({ name, des
         <Footer prices={prices} />
       </Card>
       <ModalBackground isOpen={isOpen} closeModal={closeModal} />
-      <Modal isOpen={isOpen} title={name} description={description} closeModal={closeModal} img={image} size={sizes} price={prices} />
+      <Modal isOpen={isOpen} title={name} description={description} closeModal={closeModal} img={image} sizes={sizes} price={prices} />
     </>
   );
 };
@@ -76,16 +60,15 @@ const Header: FunctionComponent<HeaderProps> = function ({ img }) {
         <IKImage path={img}
           lqip={{ active: true }}
           loading="lazy"
-          width="300"
           transformation={[{
             width: '242',
-            height: '109',
+            height: '113',
             quality: '90'
             // cropMode: "extract"
           }]} />
 
       </IKContext>
-    </CardHeader>
+    </CardHeader >
   );
 };
 
@@ -103,7 +86,6 @@ const Body: FunctionComponent<BodyProps> = function ({ name, description }) {
 const Footer: FunctionComponent<FooterProps> = function ({ prices }) {
   return (
     <CardFooter>
-      {/* <AdditionalInfos sizes={sizes} prices={prices} /> */}
       <Price>
         R$ {prices[1]},00
       </Price>

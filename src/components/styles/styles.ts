@@ -37,10 +37,12 @@ export const GradientBrand = styled.span`
 export const ProductsContainer = styled.div`
   @keyframes slideInFromLeft {
   0% {
-    transform: translateX(-100%);
+    opacity: -1;
+    transform: translateY(-100%);
   }
   100% {
-    transform: translateX(0);
+    transform: translateY(0);
+    opacity: 1;
     }
   }
 
@@ -216,15 +218,19 @@ export const Cards = styled.div`
 	@media (max-width: 768px) {
 		grid-template-areas:
 	      "a";
-    ${Card} {
-      width: 90%;
-    }
-    ${CardHeader} {
-      width: 100%;
-    }
     margin: 0;
     place-items: center;
     margin-bottom: 100px;
+    /* ${Card} {
+      width: 90%;
+    } */
+    ${CardHeader} {
+      width: 100%;
+    }
+
+    ${CardBody} {
+      height: auto;
+    }
 	}
 	max-width: 90%;
 `;

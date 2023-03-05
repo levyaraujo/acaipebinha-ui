@@ -15,13 +15,26 @@ export const Title = styled.h1`
 	color: #3A3D42;
 	font-size: 15px;
 	font-weight: 500;
-  margin: 0;
   margin-bottom: 5px;
   grid-column: 1/3;
+  text-align: start;
+  margin-left: 20px;
+  margin-bottom: 10px;
 `;
 
 
 export const ModalContainer = styled.div`
+  @keyframes growing {
+  0% {
+    transform: scale(0%) translate(-50%, -50%);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(100%) translate(-50%, -50%);
+    opacity: 1;
+    }
+  }
+  transform: scale(0);
   position: fixed;
   width: 270px;
   height: auto;
@@ -32,6 +45,7 @@ export const ModalContainer = styled.div`
   border-radius: 3px;
   z-index: 100;
   text-align: start;
+  animation: .5s 0s 1 growing;
 `;
 
 export const ModalImage = styled.img`
@@ -56,13 +70,40 @@ export const ModalBody = styled.div`
 `;
 
 export const ModalFooter = styled.div`
-  border-top: 1px solid #3A3D42;
-  margin-top: 10px;
+  /* border-top: 1px solid #3A3D42; */
+  /* margin-top: 10px; */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* place-items: center; */
-  justify-content: space-around;
 	padding: 20px 20px;
+  place-items: center;
+  place-content: center;
+`;
+
+export const AddtoCart = styled.button`
+	color: white;
+	background-color: #50A773;
+	width: 110px;
+	height: 30px;
+	font-size: 5px;
+	font-weight: 600px;
+	border-color: #50A773;
+	outline: none;
+	border-radius: 2px;
+	font-family: 'Inter', sans-serif;
+	font-weight: 600;
+	border: none;
+	box-shadow: #D9D9D9 .5px .5px 2px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	cursor: pointer;
+  justify-self: stretch;
+  grid-column: 3/3;
+
+	:hover {
+		background-color: #469d89;
+    transition: .5s;
+	}
 `;
 
 export const CloseButton = styled.button`
@@ -80,7 +121,8 @@ export const CloseButton = styled.button`
 
 export const Price = styled.p`
 	color: white;
-	font-size: 15px;
+	font-size: 12px;
 	font-weight: 600;
   margin: 0;
+  display: flex;
 `;

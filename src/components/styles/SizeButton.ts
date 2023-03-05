@@ -19,4 +19,8 @@ export const Size = styled.button`
     background-color: #4E41D9;
     color: white;
   }
+
+  &:first-child {
+    margin: 0px -10px;
+  }
 `;
