@@ -59,7 +59,7 @@ export const Modal: FunctionComponent<ModalProps> = function ({ isOpen, title, d
         </S.ModalFooter>
         <AddtoCart>
           <S.Price>
-            R$ {price}, 00
+            R$ {price[1]}, 00
           </S.Price>
         </AddtoCart>
         <S.CloseButton>

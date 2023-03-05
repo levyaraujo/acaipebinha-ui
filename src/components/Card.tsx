@@ -67,7 +67,7 @@ export const CardContainer: FunctionComponent<CardProps> = function ({ name, des
         <Footer prices={prices} />
       </Card>
       <ModalBackground isOpen={isOpen} closeModal={closeModal} />
-      <Modal isOpen={isOpen} title={name} description={description} closeModal={closeModal} img={imageUrl} size={sizes} price={prices[1]} />
+      <Modal isOpen={isOpen} title={name} description={description} closeModal={closeModal} img={imageUrl} size={sizes} price={prices} />
     </>
   );
 };
