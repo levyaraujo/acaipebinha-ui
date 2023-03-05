@@ -3,6 +3,7 @@ import { Name, Description, Price, AddtoCart } from "./styles/styles";
 import { SizeButton } from "./SizeButton";
 import * as S from "./styles/ModalStyles";
 import { AiFillCloseSquare } from "react-icons/all";
+import { IKContext, IKImage } from "imagekitio-react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -32,12 +33,22 @@ export const ModalBackground: FunctionComponent<BackgroundProps> = function ({ c
 };
 
 export const Modal: FunctionComponent<ModalProps> = function ({ isOpen, title, description, closeModal, img, size, price }) {
+  const UrlEndpoint = 'https://ik.imagekit.io/levyaraujo';
   if (isOpen === true) {
     return (
       <S.ModalContainer>
         <S.ModalHeader>
-          <S.ModalImage src={img}>
-          </S.ModalImage>
+          <IKContext urlEndpoint={UrlEndpoint}>
+            <IKImage path={img}
+              lqip={{ active: true }}
+              loading="lazy"
+              width="300"
+              transformation={[{
+                width: '242',
+                quality: '100'
+              }]} />
+
+          </IKContext>
         </S.ModalHeader>
         <S.ModalBody>
           <Name>

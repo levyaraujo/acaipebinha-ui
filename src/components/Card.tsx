@@ -3,6 +3,7 @@ import { FunctionComponent, useState, useEffect } from "react";
 import { Modal, ModalBackground } from "./Modal";
 import { BsBagPlusFill } from "react-icons/all";
 import axios from "axios";
+import { IKContext, IKImage } from "imagekitio-react";
 
 
 interface CardProps {
@@ -27,26 +28,21 @@ interface FooterProps {
   prices: number[];
 }
 
-interface AdditionalProps {
-  sizes: number[],
-  prices: number[],
-}
-
 export const CardContainer: FunctionComponent<CardProps> = function ({ name, description, sizes, prices, ingredients, image }) {
   const [isOpen, setOpenModal] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
-
-  useEffect(() => {
-    axios.get(`https://pebinhaserver.up.railway.app/static/${image}`, { responseType: 'arraybuffer' })
-      .then(response => {
-        const blob = new Blob([response.data], { type: response.headers['content-type'] });
-        const url = URL.createObjectURL(blob);
-        setImageUrl(url);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`${UrlEndpoint}/${image}`, { responseType: 'arraybuffer' })
+  //     .then(response => {
+  //       response.headers['cache-control'] = 'max-age: 31536000';
+  //       const blob = new Blob([response.data], { type: response.headers['content-type'] });
+  //       const url = URL.createObjectURL(blob);
+  //       setImageUrl(url);
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
   console.log(isOpen);
 
@@ -62,22 +58,33 @@ export const CardContainer: FunctionComponent<CardProps> = function ({ name, des
   return (
     <>
       <Card onClick={() => openModal()}>
-        <Header img={imageUrl} />
+        <Header img={image} />
         <Body name={name} description={description} />
         <Footer prices={prices} />
       </Card>
       <ModalBackground isOpen={isOpen} closeModal={closeModal} />
-      <Modal isOpen={isOpen} title={name} description={description} closeModal={closeModal} img={imageUrl} size={sizes} price={prices} />
+      <Modal isOpen={isOpen} title={name} description={description} closeModal={closeModal} img={image} size={sizes} price={prices} />
     </>
   );
 };
 
 const Header: FunctionComponent<HeaderProps> = function ({ img }) {
+  const UrlEndpoint = 'https://ik.imagekit.io/levyaraujo';
   return (
     <CardHeader>
-      <Image src={img}>
+      <IKContext urlEndpoint={UrlEndpoint}>
+        <IKImage path={img}
+          lqip={{ active: true }}
+          loading="lazy"
+          width="300"
+          transformation={[{
+            width: '242',
+            height: '109',
+            quality: '90'
+            // cropMode: "extract"
+          }]} />
 
-      </Image>
+      </IKContext>
     </CardHeader>
   );
 };
