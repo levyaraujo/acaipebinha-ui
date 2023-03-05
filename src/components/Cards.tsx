@@ -23,6 +23,5 @@ export const CardsContainer: FunctionComponent = function () {
       ))}
     </Cards>
   );
-
 };
 

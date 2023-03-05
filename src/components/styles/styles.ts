@@ -118,7 +118,7 @@ export const AddtoCart = styled.button`
 	font-family: 'Inter', sans-serif;
 	font-weight: 600;
 	border: none;
-	box-shadow: #282828 .5px .5px 2px;
+	box-shadow: #D9D9D9 .5px .5px 2px;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
@@ -143,7 +143,7 @@ export const SizeButton = styled.button`
 	font-weight: 600;
 	border: none;
   padding: 0;
-	box-shadow: #282828 .5px .5px 2px;
+	box-shadow: #D9D9D9 .5px .5px 2px;
 	text-align: center;
 	cursor: pointer;
   margin: auto;
@@ -175,7 +175,7 @@ export const Card = styled.div`
   border-radius: 3px;
   background-color: #fff;
   text-align: left;
-  box-shadow: #282828 2px 2px 10px;
+  box-shadow: #D9D9D9 5px 5px 10px;
   cursor: pointer;
 
   @media (max-width: 768px) {

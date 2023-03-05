@@ -1,5 +1,6 @@
 import { FunctionComponent, useState } from "react";
-import { Name, CardBody, Description } from "./styles/styles";
+import { Name, Description, Price, AddtoCart } from "./styles/styles";
+import { SizeButton } from "./SizeButton";
 import * as S from "./styles/ModalStyles";
 import { AiFillCloseSquare } from "react-icons/all";
 
@@ -9,6 +10,8 @@ interface ModalProps {
   title: string;
   description: string;
   img: any;
+  size: number[];
+  price: number[];
 }
 
 interface BackgroundProps {
@@ -28,7 +31,7 @@ export const ModalBackground: FunctionComponent<BackgroundProps> = function ({ c
 
 };
 
-export const Modal: FunctionComponent<ModalProps> = function ({ isOpen, title, description, closeModal, img }) {
+export const Modal: FunctionComponent<ModalProps> = function ({ isOpen, title, description, closeModal, img, size, price }) {
   if (isOpen === true) {
     return (
       <S.ModalContainer>
@@ -36,18 +39,33 @@ export const Modal: FunctionComponent<ModalProps> = function ({ isOpen, title, d
           <S.ModalImage src={img}>
           </S.ModalImage>
         </S.ModalHeader>
-        <CardBody>
+        <S.ModalBody>
           <Name>
             {title}
           </Name>
           <Description>
             {description}
           </Description>
-        </CardBody>
+        </S.ModalBody>
+        <S.ModalFooter>
+          <S.Title>
+            Escolha o tamanho:
+          </S.Title>
+          <p></p>
+          <SizeButton size={size[0]} />
+          <SizeButton size={size[1]} />
+          <SizeButton size={size[2]} />
+
+        </S.ModalFooter>
+        <AddtoCart>
+          <S.Price>
+            R$ {price}, 00
+          </S.Price>
+        </AddtoCart>
         <S.CloseButton>
           <AiFillCloseSquare size={20} onClick={closeModal} color="#4E41D9" />
         </S.CloseButton>
-      </S.ModalContainer>
+      </S.ModalContainer >
     );
   } else {
     return null;

@@ -67,7 +67,7 @@ export const CardContainer: FunctionComponent<CardProps> = function ({ name, des
         <Footer prices={prices} />
       </Card>
       <ModalBackground isOpen={isOpen} closeModal={closeModal} />
-      <Modal isOpen={isOpen} title={name} description={description} closeModal={closeModal} img={imageUrl} />
+      <Modal isOpen={isOpen} title={name} description={description} closeModal={closeModal} img={imageUrl} size={sizes} price={prices[1]} />
     </>
   );
 };
@@ -90,21 +90,6 @@ const Body: FunctionComponent<BodyProps> = function ({ name, description }) {
         {description}
       </Description>
     </CardBody>
-  );
-};
-
-const AdditionalInfos: FunctionComponent<AdditionalProps> = function ({ sizes, prices }) {
-  return (
-    <>
-      <SizeButton>
-        {sizes[0]} ml
-      </SizeButton>
-      <SizeButton>
-        {sizes[1]} ml
-      </SizeButton><SizeButton>
-        {sizes[2]} ml
-      </SizeButton>
-    </>
   );
 };
 
