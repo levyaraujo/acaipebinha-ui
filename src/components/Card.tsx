@@ -37,7 +37,7 @@ export const CardContainer: FunctionComponent<CardProps> = function ({ name, des
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
-    axios.get(`https://pebinhaserver.tunnelto.dev/static/${image}`, { responseType: 'arraybuffer' })
+    axios.get(`https://pebinhaserver.up.railway.app/static/${image}`, { responseType: 'arraybuffer' })
       .then(response => {
         const blob = new Blob([response.data], { type: response.headers['content-type'] });
         const url = URL.createObjectURL(blob);
