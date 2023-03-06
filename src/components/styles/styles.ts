@@ -1,37 +1,10 @@
 import styled from 'styled-components';
 
-export const Nav = styled.nav`
-	height: 84px;
-	width: 100vw;
-	background-color: #4E41D9;
-	position: fixed;
-	z-index: 10;
-	top: 0;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-`;
-
-export const NavIcon = styled.h1`
-	color: white;
-	font-size: 30px;
-	cursor: pointer;
-  display: flex;
-  align-items: center;
-`;
-
 export const Image = styled.img`
   width: 242px;
   height: 109px;
   object-fit: cover;
   object-position: 70% 50%;
-`;
-
-export const GradientBrand = styled.span`
-  background: linear-gradient(to right, #e9ecef, #ced4da);
-  -webkit-background-clip: text;
-  background-clip: none;
-  -webkit-text-fill-color: transparent;
 `;
 
 export const ProductsContainer = styled.div`
@@ -157,20 +130,6 @@ export const SizeButton = styled.button`
 		}
 `;
 
-export const ItemCounter = styled.span`
-	color: #4E41D9;
-	font-weight: 700;
-	font-size: 11px;
-	position: absolute;
-	background-color: white;
-	width: 13px;
-	height: 13px;
-	top: 47px;
-	border-radius: 50%;
-	text-align: center;
-	margin-left: 18px;
-`;
-
 export const Card = styled.div`
   width: 242px;
   height: auto;
@@ -178,7 +137,11 @@ export const Card = styled.div`
   background-color: #fff;
   text-align: left;
   box-shadow: #D9D9D9 5px 5px 10px;
-  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.01);
+    transition: all .2s ease-in-out;
+  }
 
   @media (max-width: 768px) {
     ${Name} {

@@ -1,12 +1,12 @@
 import { Card, CardHeader, CardBody, CardFooter, Name, Description, Price, AddtoCart, SizeButton, Image } from "./styles/styles";
-import { FunctionComponent, useState, useEffect } from "react";
-import { Modal, ModalBackground } from "./Modal";
+import { createContext, FunctionComponent, useState } from "react";
 import { BsBagPlusFill } from "react-icons/all";
-import axios from "axios";
 import { IKContext, IKImage } from "imagekitio-react";
+import { Product } from "../types/Product";
 
 
 interface CardProps {
+  id: string;
   name: string,
   description: string,
   sizes: number[],
@@ -26,9 +26,13 @@ interface BodyProps {
 
 interface FooterProps {
   prices: number[];
+  name: string;
+  id: string;
+  imagePath: string;
+  sizes: number[];
 }
 
-export const CardContainer: FunctionComponent<CardProps> = function ({ name, description, sizes, prices, ingredients, image }) {
+export const CardContainer: FunctionComponent<CardProps> = function ({ id, name, description, sizes, prices, ingredients, image }) {
   const [isOpen, setOpenModal] = useState(false);
 
   function openModal() {
@@ -40,15 +44,11 @@ export const CardContainer: FunctionComponent<CardProps> = function ({ name, des
   }
   ;
   return (
-    <>
-      <Card onClick={() => openModal()}>
-        <Header img={image} />
-        <Body name={name} description={description} />
-        <Footer prices={prices} />
-      </Card>
-      <ModalBackground isOpen={isOpen} closeModal={closeModal} />
-      <Modal isOpen={isOpen} title={name} description={description} closeModal={closeModal} img={image} sizes={sizes} price={prices} />
-    </>
+    <Card>
+      <Header img={image} />
+      <Body name={name} description={description} />
+      <Footer id={id} name={name} prices={prices} imagePath={image} sizes={sizes} />
+    </Card>
   );
 };
 
@@ -64,7 +64,6 @@ const Header: FunctionComponent<HeaderProps> = function ({ img }) {
             width: '242',
             height: '113',
             quality: '90'
-            // cropMode: "extract"
           }]} />
 
       </IKContext>
@@ -83,13 +82,47 @@ const Body: FunctionComponent<BodyProps> = function ({ name, description }) {
   );
 };
 
-const Footer: FunctionComponent<FooterProps> = function ({ prices }) {
+type CartItem = {
+  _id: string,
+  name: string,
+  imagePath: string,
+  prices: number[],
+  sizes: number[],
+  quantity: number;
+};
+
+export const cartProductsContext = createContext<CartItem[]>([]);
+
+const Footer: FunctionComponent<FooterProps> = function ({ id, name, imagePath, prices, sizes }) {
+  const [cartProducts, setCartProducts] = useState([]);
+
+  function addProduct(_id: string) {
+    const copyProducts = [...cartProducts];
+    const item = copyProducts.find((product: CartItem) => product._id === _id);
+    const product: CartItem = {
+      _id,
+      name,
+      imagePath,
+      prices,
+      sizes,
+      quantity: 1,
+    };
+
+    if (!item) {
+      copyProducts.push(product);
+    } else {
+      item.quantity += 1;
+    }
+    console.log(copyProducts);
+    setCartProducts(copyProducts);
+  }
+
   return (
     <CardFooter>
       <Price>
         R$ {prices[1]},00
       </Price>
-      <AddtoCart>
+      <AddtoCart onClick={() => addProduct(id)}>
         Adicionar <BsBagPlusFill size={15} />
       </AddtoCart>
     </CardFooter>

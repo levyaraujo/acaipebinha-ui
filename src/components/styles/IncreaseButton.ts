@@ -20,7 +20,7 @@ export const ValueButton = styled.button`
 `;
 
 
-export const ValueInput = styled.input`
+export const ValueInput = styled.p`
   background-color: #9d9d9d;
   padding: 5px 10px;
   font-size: 10px;
@@ -30,6 +30,8 @@ export const ValueInput = styled.input`
   height: 10px;
   outline: none;
   border-radius: 2px;
+  text-align: center;
+  margin-top: -1px;
 
   ::-webkit-inner-spin-button{
         -webkit-appearance: none;

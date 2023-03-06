@@ -1,4 +1,4 @@
-export default interface Product {
+export type Product = {
   _id: string,
   name: string,
   description: string,
@@ -6,4 +6,5 @@ export default interface Product {
   prices: number[],
   sizes: number[],
   ingredients: object[];
-}
+  quantity: number;
+};

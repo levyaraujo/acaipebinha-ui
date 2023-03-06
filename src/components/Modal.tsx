@@ -1,8 +1,9 @@
 import { FunctionComponent, ReactNode, useState } from "react";
 import { Name, Description, Price, AddtoCart } from "./styles/styles";
 import { Size } from "./styles/SizeButton";
+import { SizeButton } from "./SizeButton";
 import * as S from "./styles/ModalStyles";
-import { ValueButton, ValueInput, Container } from "./styles/IncreaseButton";
+import { ValueButton, ValueInput as Quantity, Container } from "./styles/IncreaseButton";
 import { AiFillCloseSquare, AiOutlinePlus, AiOutlineMinus, BsBagPlusFill, MdLocalHospital } from "react-icons/all";
 import { IKContext, IKImage } from "imagekitio-react";
 
@@ -16,55 +17,31 @@ interface ModalProps {
   price: number[];
 }
 
-interface BackgroundProps {
-  closeModal: any;
-  isOpen: boolean;
-}
-
-export const ModalBackground: FunctionComponent<BackgroundProps> = function ({ closeModal, isOpen }) {
-  if (isOpen) {
-    return (
-      <S.ModalBackground onClick={closeModal}>
-      </S.ModalBackground>
-    );
-  }
-  return null;
-
-};
-
 interface FooterProps {
   sizes: number[];
   price: number[];
 }
 
 const Footer: FunctionComponent<FooterProps> = function ({ sizes, price }) {
-  const [value, setValue] = useState(1);
-  const selectedPrice = localStorage.getItem('price');
-  const [size, setSize] = useState(sizes[1]);
-  const [total, setTotal] = useState(Number(price[1] * value));
-
-  const handleTotal = () => {
-    setTotal(Number(Number(selectedPrice) * value));
-  };
-
-  const handleSize = (size: number) => {
-    setSize(size);
-  };
+  const [quantity, setQuantity] = useState(1);
+  const [selectedPrice, setPrice] = useState(price[1]);
+  const [total, setTotal] = useState(price[1]);
 
   const handleIncrease = () => {
-    setValue(value + 1);
+    setQuantity(quantity + 1);
+    setTotal(selectedPrice * quantity);
   };
 
   const handleDecrease = () => {
-    if (value > 0)
-      setValue(value - 1);
+    if (quantity !== 0) {
+      setQuantity(quantity - 1);
+      setTotal(total - selectedPrice);
+    };
   };
 
-  const handleInputChange = (event: any) => {
-    setValue(parseInt(event.target.value));
-  };
-
+  console.log(quantity);
   console.log(total);
+  console.log(selectedPrice);
 
   return (
     <S.ModalFooter >
@@ -72,22 +49,17 @@ const Footer: FunctionComponent<FooterProps> = function ({ sizes, price }) {
         Escolha o tamanho:
       </S.Title>
       <p></p>
-      <Size onClick={() => { handleSize(sizes[0]); localStorage.setItem('price', `${price[0]}`); }}>
-        {sizes[0]} ml
-      </Size>
-      <Size onClick={() => { handleSize(sizes[1]); localStorage.setItem('price', `${price[1]}`); }}>
-        {sizes[1]} ml
-      </Size>
-      <Size onClick={() => { handleSize(sizes[2]); localStorage.setItem('price', `${price[2]}`); }}>
-        {sizes[2]} ml
-      </Size>
+      <SizeButton size={sizes[0]} handlePrice={() => setPrice(price[0])} />
+      <SizeButton size={sizes[1]} handlePrice={() => setPrice(price[1])} />
+      <SizeButton size={sizes[2]} handlePrice={() => setPrice(price[2])} />
 
       <Container>
-        <ValueButton onClick={() => { handleDecrease(); handleTotal(); }}>
+        <ValueButton onClick={() => { handleDecrease(); }}>
           <AiOutlineMinus size={10} />
         </ValueButton>
-        <ValueInput type="number" value={value} onChange={handleInputChange}>
-        </ValueInput>
+        <Quantity>
+          {quantity}
+        </Quantity>
         <ValueButton onClick={() => { handleIncrease(); }}>
           <AiOutlinePlus size={10} />
         </ValueButton>
