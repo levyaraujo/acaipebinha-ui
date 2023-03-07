@@ -1,15 +1,15 @@
-import { createContext, FunctionComponent, useState } from "react";
+import { createContext, FunctionComponent, useContext } from "react";
 import { Title } from "../styles/styles";
 import { Cart as CartContainer } from "./cart";
+import { cartProductsContext } from "../Card";
 
 interface CardProps {
   isOpen: boolean;
-  products: [];
 }
 
-export const CartContext = createContext([]);
+export const Cart: FunctionComponent<CardProps> = function ({ isOpen }) {
+  const products = useContext(cartProductsContext);
 
-export const Cart: FunctionComponent<CardProps> = function ({ isOpen, products }) {
   if (isOpen) {
     return (
       <CartContainer>

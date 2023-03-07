@@ -27,7 +27,7 @@ export const NavBar: FunctionComponent = function () {
         </ItemCounter>
       </CartIcon>
       <Background isOpen={isOpen} closeBackground={() => closeCart()} />
-      <Cart isOpen={isOpen} products={cartProductsContext} />
+      <Cart isOpen={isOpen} />
     </Nav>
   );
 };

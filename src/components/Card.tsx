@@ -94,7 +94,7 @@ type CartItem = {
 export const cartProductsContext = createContext<CartItem[]>([]);
 
 const Footer: FunctionComponent<FooterProps> = function ({ id, name, imagePath, prices, sizes }) {
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState<CartItem[]>([]);
 
   function addProduct(_id: string) {
     const copyProducts = [...cartProducts];
@@ -111,20 +111,22 @@ const Footer: FunctionComponent<FooterProps> = function ({ id, name, imagePath, 
     if (!item) {
       copyProducts.push(product);
     } else {
-      item.quantity += 1;
+      item.quantity++;
     }
     console.log(copyProducts);
     setCartProducts(copyProducts);
   }
 
   return (
-    <CardFooter>
-      <Price>
-        R$ {prices[1]},00
-      </Price>
-      <AddtoCart onClick={() => addProduct(id)}>
-        Adicionar <BsBagPlusFill size={15} />
-      </AddtoCart>
-    </CardFooter>
+    <cartProductsContext.Provider value={cartProducts}>
+      <CardFooter>
+        <Price>
+          R$ {prices[1]},00
+        </Price>
+        <AddtoCart onClick={() => addProduct(id)}>
+          Adicionar <BsBagPlusFill size={15} />
+        </AddtoCart>
+      </CardFooter>
+    </cartProductsContext.Provider>
   );
 };
