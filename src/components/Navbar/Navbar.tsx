@@ -3,7 +3,7 @@ import { Nav, NavIcon, CartIcon, ItemCounter, GradientBrand } from "./navbar";
 import { BiShoppingBag } from "react-icons/all";
 import { Background } from "../Background/Background";
 import { Cart } from "../Cart/Cart";
-import { cartProductsContext } from "../Card";
+import CartProvider from "../../context/cart";
 
 export const NavBar: FunctionComponent = function () {
   const [isOpen, setIsOpen] = useState(false);

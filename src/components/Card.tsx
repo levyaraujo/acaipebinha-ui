@@ -1,9 +1,8 @@
 import { Card, CardHeader, CardBody, CardFooter, Name, Description, Price, AddtoCart, SizeButton, Image } from "./styles/styles";
-import { createContext, FunctionComponent, useState } from "react";
+import { FunctionComponent, useContext} from "react";
 import { BsBagPlusFill } from "react-icons/all";
 import { IKContext, IKImage } from "imagekitio-react";
-import { Product } from "../types/Product";
-
+import { CartContext } from "../context/cart";
 
 interface CardProps {
   id: string;
@@ -33,16 +32,6 @@ interface FooterProps {
 }
 
 export const CardContainer: FunctionComponent<CardProps> = function ({ id, name, description, sizes, prices, ingredients, image }) {
-  const [isOpen, setOpenModal] = useState(false);
-
-  function openModal() {
-    setOpenModal(true);
-  }
-
-  function closeModal() {
-    setOpenModal(false);
-  }
-  ;
   return (
     <Card>
       <Header img={image} />
@@ -82,51 +71,55 @@ const Body: FunctionComponent<BodyProps> = function ({ name, description }) {
   );
 };
 
-type CartItem = {
-  _id: string,
-  name: string,
-  imagePath: string,
-  prices: number[],
-  sizes: number[],
-  quantity: number;
-};
-
-export const cartProductsContext = createContext<CartItem[]>([]);
-
 const Footer: FunctionComponent<FooterProps> = function ({ id, name, imagePath, prices, sizes }) {
-  const [cartProducts, setCartProducts] = useState<CartItem[]>([]);
+  const {products, setProducts} = useContext(CartContext);
+  type Product = {
+    id: string;
+    name: string;
+    quantity: number;
+  }
 
-  function addProduct(_id: string) {
-    const copyProducts = [...cartProducts];
-    const item = copyProducts.find((product: CartItem) => product._id === _id);
-    const product: CartItem = {
-      _id,
-      name,
-      imagePath,
-      prices,
-      sizes,
-      quantity: 1,
-    };
+  function addProductToCart(id: string) {
+    const productsCopy = [...products];
+    const item = productsCopy.find((product: Product) => product.id === id);
 
     if (!item) {
-      copyProducts.push(product);
+      productsCopy.push({ id: id, name: 'teste', quantity: 1 });
     } else {
-      item.quantity++;
+      item.id += 1;
     }
-    console.log(copyProducts);
-    setCartProducts(copyProducts);
+    setProducts(productsCopy);
+  }
+
+  function removeProductFromCart(id: string) {
+    const copyProductsCart = [...products];
+
+    const item = copyProductsCart.find((product) => product.id === id);
+
+    if (item && item.quantity > 1) {
+      item.quantity = item.quantity - 1;
+      setProducts(copyProductsCart);
+    } else {
+      const arrayFiltered = copyProductsCart.filter(
+        (product) => product.id !== id
+      );
+      setProducts(arrayFiltered);
+    }
+  }
+
+
+  function clearCart() {
+    setProducts([]);
   }
 
   return (
-    <cartProductsContext.Provider value={cartProducts}>
-      <CardFooter>
-        <Price>
-          R$ {prices[1]},00
-        </Price>
-        <AddtoCart onClick={() => addProduct(id)}>
-          Adicionar <BsBagPlusFill size={15} />
-        </AddtoCart>
-      </CardFooter>
-    </cartProductsContext.Provider>
+    <CardFooter>
+      <Price>
+        R$ {prices[1]},00
+      </Price>
+      <AddtoCart onClick={() => addProductToCart(id)}>
+        Adicionar <BsBagPlusFill size={15} />
+      </AddtoCart>
+    </CardFooter>
   );
 };
