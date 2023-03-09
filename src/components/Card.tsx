@@ -2,7 +2,8 @@ import { Card, CardHeader, CardBody, CardFooter, Name, Description, Price, Addto
 import { FunctionComponent, useContext} from "react";
 import { BsBagPlusFill } from "react-icons/all";
 import { IKContext, IKImage } from "imagekitio-react";
-import { CartContext } from "../context/cart";
+import CartProvider, { CartContext } from "../context/cart";
+import { Cart } from "./Cart/Cart";
 
 interface CardProps {
   id: string;
@@ -72,54 +73,16 @@ const Body: FunctionComponent<BodyProps> = function ({ name, description }) {
 };
 
 const Footer: FunctionComponent<FooterProps> = function ({ id, name, imagePath, prices, sizes }) {
-  const {products, setProducts} = useContext(CartContext);
-  type Product = {
-    id: string;
-    name: string;
-    quantity: number;
-  }
-
-  function addProductToCart(id: string) {
-    const productsCopy = [...products];
-    const item = productsCopy.find((product: Product) => product.id === id);
-
-    if (!item) {
-      productsCopy.push({ id: id, name: 'teste', quantity: 1 });
-    } else {
-      item.id += 1;
-    }
-    setProducts(productsCopy);
-  }
-
-  function removeProductFromCart(id: string) {
-    const copyProductsCart = [...products];
-
-    const item = copyProductsCart.find((product) => product.id === id);
-
-    if (item && item.quantity > 1) {
-      item.quantity = item.quantity - 1;
-      setProducts(copyProductsCart);
-    } else {
-      const arrayFiltered = copyProductsCart.filter(
-        (product) => product.id !== id
-      );
-      setProducts(arrayFiltered);
-    }
-  }
-
-
-  function clearCart() {
-    setProducts([]);
-  }
+  const {products, addProductToCart, removeProductFromCart, clearCart} = useContext(CartContext);
 
   return (
-    <CardFooter>
-      <Price>
-        R$ {prices[1]},00
-      </Price>
-      <AddtoCart onClick={() => addProductToCart(id)}>
-        Adicionar <BsBagPlusFill size={15} />
-      </AddtoCart>
-    </CardFooter>
+      <CardFooter>
+        <Price>
+          R$ {prices[1]},00
+        </Price>
+        <AddtoCart onClick={() => addProductToCart(String(id))}>
+          Adicionar <BsBagPlusFill size={15} />
+        </AddtoCart>
+      </CardFooter>
   );
 };

@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useContext, useState } from "react";
 import { Nav, NavIcon, CartIcon, ItemCounter, GradientBrand } from "./navbar";
 import { BiShoppingBag } from "react-icons/all";
 import { Background } from "../Background/Background";
@@ -27,7 +27,9 @@ export const NavBar: FunctionComponent = function () {
         </ItemCounter>
       </CartIcon>
       <Background isOpen={isOpen} closeBackground={() => closeCart()} />
-      <Cart isOpen={isOpen} />
+      <CartProvider>
+        <Cart isOpen={isOpen}/>
+      </CartProvider>
     </Nav>
   );
 };

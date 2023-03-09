@@ -1,4 +1,4 @@
-import { createContext, FunctionComponent, useContext, useState } from "react";
+import { createContext, FunctionComponent, useContext } from "react";
 import { Title } from "../styles/styles";
 import { Cart as CartContainer } from "./cart";
 import { CartContext } from "../../context/cart";
@@ -8,15 +8,13 @@ interface CardProps {
 }
 
 export const Cart: FunctionComponent<CardProps> = function ({ isOpen }) {
-  const products: Array<object> = useContext(CartContext);
+  const { products } = useContext(CartContext);
 
   if (isOpen) {
     return (
       <CartContainer>
-        <Title>Carrinho</Title>
-        <div>
-          {JSON.stringify(products)}
-        </div>
+        <Title>Carrinho de compras</Title>
+        {JSON.stringify(products)}
       </CartContainer>
     );
   } else {
