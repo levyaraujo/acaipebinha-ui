@@ -1,8 +1,8 @@
 import { Card, CardHeader, CardBody, CardFooter, Name, Description, Price, AddtoCart, SizeButton, Image } from "./styles/styles";
-import { FunctionComponent, useContext } from "react";
+import { FunctionComponent, memo, useCallback, useContext } from "react";
 import { BsBagPlusFill } from "react-icons/all";
 import { IKContext, IKImage } from "imagekitio-react";
-import CartProvider, { CartContext } from "../context/cart";
+import { CartContext } from "../context/cart";
 import { Cart } from "./Cart/Cart";
 import { IsOpenContext, IsOpenProvider } from "../context/isOpen";
 import { Background } from "./Background/Background";
@@ -63,33 +63,42 @@ const Header: FunctionComponent<HeaderProps> = function ({ img }) {
   );
 };
 
-const Body: FunctionComponent<BodyProps> = function ({ name, description }) {
+const Body: FunctionComponent<BodyProps> = memo(function ({ name, description }) {
   return (
     <CardBody>
       <Name>{name}</Name>
-      <Description>
-        {description}
-      </Description>
+      <Description>{description}</Description>
     </CardBody>
   );
-};
+});
 
-const Footer: FunctionComponent<FooterProps> = function ({ id, name, imagePath, prices, sizes }) {
+
+const Footer: FunctionComponent<FooterProps> = function ({
+  id,
+  name,
+  imagePath,
+  prices = [],
+  sizes = [],
+}) {
   const { products, addProductToCart } = useContext(CartContext);
   const { isOpen, setOpen } = useContext(IsOpenContext);
+  const [_, price] = prices;
+
+  const handleClick = useCallback(() => {
+    addProductToCart(id.toString(), name, prices, imagePath);
+  }, [addProductToCart, id, name]);
 
   return (
     <>
       <CardFooter>
-        <Price>
-          R$ {prices[1]},00
-        </Price>
-        <AddtoCart onClick={() => { addProductToCart(id.toString(), name); }}>
+        <Price>R$ {price},00</Price>
+        <AddtoCart onClick={handleClick}>
           Adicionar <BsBagPlusFill size={15} />
         </AddtoCart>
-        <Background isOpen={isOpen} closeBackground={() => setOpen(false)} />
-        <Cart isOpen={isOpen} products={products} />
-      </CardFooter >
+      </CardFooter>
+      <Background isOpen={isOpen} closeBackground={() => setOpen(false)} />
+      <Cart isOpen={isOpen} products={products} />
     </>
   );
 };
+

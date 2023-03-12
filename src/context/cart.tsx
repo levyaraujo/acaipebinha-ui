@@ -9,11 +9,13 @@ interface Product {
   id: string;
   name: string;
   quantity: number;
+  prices: number[];
+  imagePath: string;
 }
 
 interface CartContextType {
   products: Product[];
-  addProductToCart: (id: string, name: string) => void;
+  addProductToCart: (id: string, name: string, prices: number[], imagePath: string) => void;
   removeProductFromCart: (id: string) => void;
   clearCart: () => void;
 }
@@ -28,12 +30,12 @@ export const CartContext = createContext<CartContextType>({
 export default function CartProvider({ children }: CartProps) {
   const [products, setProducts] = useState<Product[]>([]);
 
-  function addProductToCart(id: string, name: string): void {
+  function addProductToCart(id: string, name: string, prices: number[], imagePath: string): void {
     const productsCopy = [...products];
     const item = productsCopy.find((product: Product) => product.id === id);
 
     if (!item) {
-      productsCopy.push({ id: id, name: name, quantity: 1 });
+      productsCopy.push({ id: id, name: name, quantity: 1, prices: prices, imagePath: imagePath });
     } else {
       item.quantity += 1;
     }

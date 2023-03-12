@@ -15,8 +15,8 @@ export const Cart = styled.div`
   text-align: center;
   transform: scale(0);
   position: fixed;
-  width: 80%;
-  height: 90%;
+  width: 50%;
+  height: 80%;
   background-color: #fff;
   top: 50%;
   left: 50%;
@@ -24,4 +24,5 @@ export const Cart = styled.div`
   border-radius: 3px;
   z-index: 10;
   animation: .5s 0s 1 growing;
+  margin-top: 20px;
 `;

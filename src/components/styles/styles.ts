@@ -103,6 +103,10 @@ export const AddtoCart = styled.button`
 		background-color: #469d89;
     transition: .5s;
 	}
+
+  :active {
+    transform: translateY(10px);
+  }
 `;
 
 export const SizeButton = styled.button`

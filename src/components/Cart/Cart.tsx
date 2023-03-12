@@ -3,6 +3,8 @@ import { Title } from "../styles/styles";
 import { Cart as CartContainer } from "./cart";
 import { CartContext } from "../../context/cart";
 import { BsCart4 } from 'react-icons/bs';
+import { CloseButton } from "../CloseButton/CloseButton";
+import { IsOpenContext } from "../../context/isOpen";
 
 interface CardProps {
   isOpen: boolean;
@@ -11,13 +13,26 @@ interface CardProps {
 
 export const Cart: FunctionComponent<CardProps> = function ({ isOpen }) {
   const { products } = useContext(CartContext);
-  console.log(products);
+  const { setOpen } = useContext(IsOpenContext);
+
+  function closeCart() {
+    setOpen(false);
+  }
 
   if (isOpen) {
     return (
       <CartContainer>
         <Title>Carrinho <BsCart4 /></Title>
-        {JSON.stringify(products)}
+        {products.map((product: any) => {
+          return (
+            <div>
+              <h1>{product.name}</h1>
+              <h2>{product.price}</h2>
+            </div>
+          );
+        })
+        }
+        <CloseButton closeCart={closeCart} />
       </CartContainer>
     );
   } else {

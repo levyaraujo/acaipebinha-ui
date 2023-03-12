@@ -106,19 +106,6 @@ export const AddtoCart = styled.button`
 	}
 `;
 
-export const CloseButton = styled.button`
-  margin-top: 1px;
-  margin-right: -2px;
-  position:absolute;
-  background-color: transparent;
-  top:0;
-  right:0;
-  border: none;
-  text-align: center;
-  font-weight: bold;
-  cursor: pointer;
-`;
-
 export const Price = styled.p`
 	color: white;
 	font-size: 12px;
