@@ -11,6 +11,8 @@ export const Cart = styled.div`
     opacity: 1;
     }
   }
+  padding: 2rem;
+  text-align: center;
   transform: scale(0);
   position: fixed;
   width: 80%;
@@ -20,7 +22,6 @@ export const Cart = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 3px;
-  z-index: 100;
-  text-align: start;
+  z-index: 10;
   animation: .5s 0s 1 growing;
 `;

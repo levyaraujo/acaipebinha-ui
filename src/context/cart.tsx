@@ -13,32 +13,31 @@ interface Product {
 
 interface CartContextType {
   products: Product[];
-  addProductToCart: (id: string) => void;
+  addProductToCart: (id: string, name: string) => void;
   removeProductFromCart: (id: string) => void;
   clearCart: () => void;
 }
 
 export const CartContext = createContext<CartContextType>({
   products: [],
-  addProductToCart: () => {},
-  removeProductFromCart: () => {},
-  clearCart: () => {},
+  addProductToCart: () => { },
+  removeProductFromCart: () => { },
+  clearCart: () => { },
 });
 
 export default function CartProvider({ children }: CartProps) {
   const [products, setProducts] = useState<Product[]>([]);
 
-  function addProductToCart(id: string): void {
+  function addProductToCart(id: string, name: string): void {
     const productsCopy = [...products];
     const item = productsCopy.find((product: Product) => product.id === id);
 
     if (!item) {
-      productsCopy.push({ id: id, name: 'teste', quantity: 1 });
+      productsCopy.push({ id: id, name: name, quantity: 1 });
     } else {
       item.quantity += 1;
     }
     setProducts(productsCopy);
-    console.log(productsCopy);
   }
 
   function removeProductFromCart(id: string): void {

@@ -1,9 +1,11 @@
 import { Card, CardHeader, CardBody, CardFooter, Name, Description, Price, AddtoCart, SizeButton, Image } from "./styles/styles";
-import { FunctionComponent, useContext} from "react";
+import { FunctionComponent, useContext } from "react";
 import { BsBagPlusFill } from "react-icons/all";
 import { IKContext, IKImage } from "imagekitio-react";
 import CartProvider, { CartContext } from "../context/cart";
 import { Cart } from "./Cart/Cart";
+import { IsOpenContext, IsOpenProvider } from "../context/isOpen";
+import { Background } from "./Background/Background";
 
 interface CardProps {
   id: string;
@@ -73,16 +75,21 @@ const Body: FunctionComponent<BodyProps> = function ({ name, description }) {
 };
 
 const Footer: FunctionComponent<FooterProps> = function ({ id, name, imagePath, prices, sizes }) {
-  const {products, addProductToCart, removeProductFromCart, clearCart} = useContext(CartContext);
+  const { products, addProductToCart } = useContext(CartContext);
+  const { isOpen, setOpen } = useContext(IsOpenContext);
 
   return (
+    <>
       <CardFooter>
         <Price>
           R$ {prices[1]},00
         </Price>
-        <AddtoCart onClick={() => addProductToCart(String(id))}>
+        <AddtoCart onClick={() => { addProductToCart(id.toString(), name); }}>
           Adicionar <BsBagPlusFill size={15} />
         </AddtoCart>
-      </CardFooter>
+        <Background isOpen={isOpen} closeBackground={() => setOpen(false)} />
+        <Cart isOpen={isOpen} products={products} />
+      </CardFooter >
+    </>
   );
 };
