@@ -31,7 +31,7 @@ export const Footer: FunctionComponent<FooterProps> = ({
     return sizes[randomIndex];
   }
 
-  const { addItem, cartItems } = useContext(CartContext);
+  const { addItem } = useContext(CartContext);
 
   const [size, setSize] = useState(`${genRandom()}`);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

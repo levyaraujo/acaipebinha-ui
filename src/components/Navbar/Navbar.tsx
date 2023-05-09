@@ -1,13 +1,11 @@
-import { FunctionComponent, useContext } from "react";
+import { FunctionComponent } from "react";
 import * as S from "./navbar.style";
 import { Link } from "react-router-dom";
 import { BsHandbag } from "react-icons/bs";
 import { Logo } from "./Logo";
-import { CartContext } from "../Cart/cart.context";
 import { CartCounter } from "../CartCounter";
 
 export const Navbar: FunctionComponent = () => {
-  const { cartItems } = useContext(CartContext);
   return (
     <S.Navbar>
       <Logo />
