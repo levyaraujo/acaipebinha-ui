@@ -37,7 +37,7 @@ export const Cart: FunctionComponent = () => {
                 />
                 <S.Title>{item.name}</S.Title>
               </S.Description>
-              <S.Price>{sizes[item.price]} ml</S.Price>
+              <S.Size>{sizes[item.price]} ml</S.Size>
               <Quantity item={item} />
               <S.Price>R${item.price * item.quantity},00</S.Price>
             </S.CartItem>

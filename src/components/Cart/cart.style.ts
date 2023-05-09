@@ -5,6 +5,10 @@ export const Title = styled.h2`
   font-weight: 600;
   color: #3a3d42;
   margin-left: 0.8rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const Cart = styled.div`
@@ -14,6 +18,12 @@ export const Cart = styled.div`
   width: 50%;
   margin: 5rem auto;
   border: 1px solid #e0e0e0;
+
+  @media (max-width: 768px) {
+    grid-template-areas: "a";
+    flex-direction: column;
+    width: 90%;
+  }
 `;
 
 export const CartItem = styled.div`
@@ -26,6 +36,24 @@ export const CartItem = styled.div`
   align-items: center;
   /* margin-bottom: 20px; */
   border-bottom: 1px solid #e0e0e0;
+
+  @media (max-width: 768px) {
+    grid-template-areas: "a";
+    flex-direction: column;
+    max-width: 90%;
+    gap: 1.5rem;
+  }
+`;
+
+export const Size = styled.h4`
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #50a773;
+
+  @media (max-width: 768px) {
+    display: none;
+    font-size: 1.3rem;
+  }
 `;
 
 export const Description = styled.div`
@@ -35,26 +63,24 @@ export const Description = styled.div`
   flex-direction: row;
   align-items: center;
   text-align: start;
-`;
 
-export const CartHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 1.2rem;
-`;
-
-export const HeaderTitle = styled.h4`
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: #3a3d42;
-  margin: 0;
+  @media (max-width: 768px) {
+    grid-template-areas: "a";
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    max-width: 90%;
+  }
 `;
 
 export const Price = styled.h4`
   font-size: 1.2rem;
   font-weight: 500;
   color: #50a773;
+
+  @media (max-width: 768px) {
+    display: inline;
+    font-size: 1.3rem;
+  }
 `;
 
 export const TotalContainer = styled.div`
@@ -66,6 +92,10 @@ export const TotalContainer = styled.div`
   align-self: flex-end;
   margin: 2rem 0;
   border: 1px solid #e0e0e0;
+
+  @media (max-width: 768px) {
+    align-self: center;
+  }
 `;
 
 export const Total = styled.h3`
