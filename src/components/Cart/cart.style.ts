@@ -36,7 +36,6 @@ export const CartItem = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* margin-bottom: 20px; */
 
   @media (max-width: 768px) {
     grid-template-areas: "a";
