@@ -8,7 +8,7 @@ export const Products: FunctionComponent = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    fetch("https://acaipebinha.herokuapp.com/products")
+    fetch("https://acaipebinha.fly.dev/products")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
