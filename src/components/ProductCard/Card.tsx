@@ -1,25 +1,37 @@
+import { FunctionComponent } from "react";
 import * as S from "./card.style";
+import { Image } from "./CardImage";
+import { Title } from "./Title";
+import { Description } from "./Description";
+import { Footer } from "./Footer";
+import { CartProvider } from "../Cart/cart.context";
 
-export function Card() {
+export interface CardProps {
+  _id: string;
+  name: string;
+  description: string;
+  imagePath: string;
+  sizes: number[];
+  prices?: number[];
+}
+
+export const Card: FunctionComponent<CardProps> = ({
+  _id,
+  name,
+  description,
+  imagePath,
+  sizes,
+}) => {
   return (
     <S.Card>
-      <div className="card" style={{ width: "18rem" }}>
-        <img
-          src="https://thumbs.dreamstime.com/b/acai-bowl-acai-bowl-popular-brazil-hawaii-baja-california-31330441.jpg"
-          className="card-img-top"
-          alt="..."
-        />
-        <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" className="btn btn-primary">
-            Go somewhere
-          </a>
-        </div>
-      </div>
+      <Image imagePath={imagePath} />
+      <S.CardBody>
+        <Title title={name} />
+        <Description description={description} />
+      </S.CardBody>
+      <CartProvider>
+        <Footer sizes={sizes} id={_id} name={name} imagePath={imagePath} />
+      </CartProvider>
     </S.Card>
   );
-}
+};

@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
+import * as S from "./cart.style";
+import { CartContext } from "./cart.context";
+import { useContext } from "react";
 
 export function Cart() {
+  const { cartItems } = useContext(CartContext);
+
   return (
     <motion.div
       initial={{ opacity: 0, transform: "translateX(100%)" }}
@@ -12,7 +17,7 @@ export function Cart() {
       exit={{ opacity: 0 }}
       style={{ marginTop: "5rem", display: "flex", justifyContent: "center" }}
     >
-      <h1>Cart aaaaaaaaa</h1>
+      <S.Title>{JSON.stringify(cartItems)}</S.Title>
     </motion.div>
   );
 }

@@ -3,14 +3,16 @@ import "../index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AnimatedRoutes } from "./AnimatedRoutes";
-
 import { AnimatePresence } from "framer-motion";
+import { CartProvider } from "./Cart/cart.context";
 
 function App() {
   return (
     <AnimatePresence>
       <Router>
-        <Navbar />
+        <CartProvider>
+          <Navbar />
+        </CartProvider>
         <AnimatedRoutes />
       </Router>
     </AnimatePresence>
