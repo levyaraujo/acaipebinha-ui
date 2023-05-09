@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { createContext, useState } from "react";
+import {
+  ChangeEvent,
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 export interface CartItem {
   id: string;
@@ -12,7 +18,10 @@ export interface CartItem {
 interface CartContextProps {
   cartItems: CartItem[];
   addItem: (item: CartItem) => void;
-  removeItem: (itemId: string) => void;
+  increaseQuantity: (item: CartItem) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  decreaseQuantity: (item: CartItem) => void;
+  removeItemFromCart: (item: CartItem) => void;
   updateQuantity: (itemId: string, newQuantity: number) => void;
 }
 
@@ -25,7 +34,13 @@ export const CartContext = createContext<CartContextProps>({
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   addItem: (_item: CartItem) => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  removeItem: (_itemId: string) => {},
+  increaseQuantity: (_item: CartItem) => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  decreaseQuantity: (_item: CartItem) => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChange: (_event: ChangeEvent<HTMLInputElement>) => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  removeItemFromCart: (_item: CartItem) => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
   updateQuantity: (_itemId: string, _newQuantity: number) => {},
 });
@@ -33,30 +48,62 @@ export const CartContext = createContext<CartContextProps>({
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(getCartItems());
 
-  const addItem = (item: CartItem) => {
-    let products: CartItem[] = [];
-    if (localStorage.getItem("products")) {
-      products = JSON.parse(localStorage.getItem("products") ?? "");
-    }
+  useEffect(() => {
+    const handleStorage = () => {
+      setCartItems(getCartItems());
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []);
 
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(event.target.value, 10);
+    if (!isNaN(value)) {
+      setCartItems(getCartItems());
+    }
+  };
+
+  const addItem = useCallback((item: CartItem) => {
+    const products: CartItem[] = [];
     if (!products.some((product) => product.id === item.id)) {
       products.push(item);
-      localStorage.setItem("products", JSON.stringify(products));
+      localStorage.setItem(item.id, JSON.stringify(item));
+      window.dispatchEvent(new Event("storage"));
     }
-  };
+  }, []);
 
-  function getCartItems(): CartItem[] {
-    let products: CartItem[] = [];
-    if (localStorage.getItem("products")) {
-      products = JSON.parse(localStorage.getItem("products") ?? "");
+  function getCartItems() {
+    const products = { ...localStorage };
+    const cartItems: CartItem[] = [];
+    for (const key in products) {
+      if (Object.prototype.hasOwnProperty.call(products, key)) {
+        const product = products[key];
+        cartItems.push(JSON.parse(product));
+      }
     }
-    return products;
+    return cartItems;
   }
 
-  const removeItem = (itemId: string) => {
-    const updatedItems = cartItems.filter((item) => item.id !== itemId);
-    setCartItems(updatedItems);
-  };
+  function increaseQuantity(item: CartItem) {
+    item.quantity += 1;
+    localStorage.setItem(item.id, JSON.stringify(item));
+    window.dispatchEvent(new Event("storage"));
+  }
+
+  function decreaseQuantity(item: CartItem) {
+    if (item.quantity > 1) {
+      item.quantity -= 1;
+      localStorage.setItem(item.id, JSON.stringify(item));
+      window.dispatchEvent(new Event("storage"));
+    }
+  }
+
+  function removeItemFromCart(item: CartItem) {
+    localStorage.removeItem(item.id);
+    window.dispatchEvent(new Event("storage"));
+  }
 
   const updateQuantity = (itemId: string, newQuantity: number) => {
     const itemIndex = cartItems.findIndex((item) => item.id === itemId);
@@ -71,7 +118,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const contextValue: CartContextProps = {
     cartItems,
     addItem,
-    removeItem,
+    onChange,
+    increaseQuantity,
+    decreaseQuantity,
+    removeItemFromCart,
     updateQuantity,
   };
 

@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import * as S from "./card.style";
-import { Image } from "./CardImage";
+import { Image } from "../Image";
 import { Title } from "./Title";
 import { Description } from "./Description";
 import { Footer } from "./Footer";

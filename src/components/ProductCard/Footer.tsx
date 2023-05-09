@@ -102,7 +102,6 @@ export const Footer: FunctionComponent<FooterProps> = ({
             }}
             onClick={() => {
               handleAddItem();
-              console.log(cartItems);
             }}
           >
             <MdAddShoppingCart size={25} />
