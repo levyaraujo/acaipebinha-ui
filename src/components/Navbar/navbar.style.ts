@@ -12,31 +12,41 @@ export const Navbar = styled.nav`
   font-family: "Poppins", sans-serif;
   position: fixed;
   top: 0;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    max-width: 768px; /* adjust for scrollbar */
+    overflow-x: hidden;
+  }
 `;
 
 export const NavbarLogo = styled.h1`
   text-decoration: none;
   font-size: 1.5rem;
+  cursor: pointer;
 `;
 
 export const CartIcon = styled.h1`
   color: white;
-  font-size: 30px;
+  font-size: 2rem;
   cursor: pointer;
   display: flex;
   align-items: center;
+  background-color: transparent;
+  border: none;
 `;
 
 export const ItemCounter = styled.span`
   color: #4e41d9;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 0.8rem;
   position: absolute;
   background-color: white;
-  width: 13px;
-  height: 13px;
-  top: 47px;
+  width: 1.3rem;
+  height: 1.3rem;
+  top: 3rem;
   border-radius: 50%;
   text-align: center;
-  margin-left: 18px;
+  margin-left: 1.8rem;
+  line-height: 1.3rem;
 `;

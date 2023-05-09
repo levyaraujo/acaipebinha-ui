@@ -8,6 +8,7 @@ export const Title = styled.h2`
 
   @media (max-width: 768px) {
     font-size: 1.2rem;
+    margin: 0;
   }
 `;
 
@@ -20,8 +21,9 @@ export const Cart = styled.div`
   border: 1px solid #e0e0e0;
 
   @media (max-width: 768px) {
-    grid-template-areas: "a";
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 90%;
   }
 `;
@@ -35,11 +37,11 @@ export const CartItem = styled.div`
   justify-content: space-between;
   align-items: center;
   /* margin-bottom: 20px; */
-  border-bottom: 1px solid #e0e0e0;
 
   @media (max-width: 768px) {
     grid-template-areas: "a";
     flex-direction: column;
+    justify-content: center;
     max-width: 90%;
     gap: 1.5rem;
   }
@@ -65,10 +67,8 @@ export const Description = styled.div`
   text-align: start;
 
   @media (max-width: 768px) {
-    grid-template-areas: "a";
-    align-items: flex-end;
-    margin-bottom: 2rem;
     max-width: 90%;
+    flex-direction: column;
   }
 `;
 
