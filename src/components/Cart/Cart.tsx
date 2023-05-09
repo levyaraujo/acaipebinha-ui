@@ -6,8 +6,6 @@ import { Image } from "../Image";
 import { Quantity } from "./QuantityButton";
 import { sizes } from "../../interfaces/Sizes";
 import { Line } from "../Line";
-import { BiArrowBack } from "react-icons/bi";
-import { Link } from "react-router-dom";
 
 export const Cart: FunctionComponent = () => {
   const { cartItems } = useContext(CartContext);
