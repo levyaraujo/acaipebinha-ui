@@ -9,8 +9,13 @@ export const Products = styled.div`
   text-align: center;
   justify-content: center;
 
-  @media (max-width: 768px) {
-    grid-template-areas: "a";
+  @media (max-width: 1000px) {
+    grid-template-areas: "a a";
     max-width: 90%;
+  }
+
+  @media (max-width: 700px) {
+    grid-template-areas: "a";
+    max-width: 80%;
   }
 `;

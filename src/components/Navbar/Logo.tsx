@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import * as S from "./navbar.style";
+import * as S from "./styles";
 
 export function Logo() {
   return (

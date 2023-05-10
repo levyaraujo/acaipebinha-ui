@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import * as S from "./navbar.style";
+import * as S from "./styles";
 import { Link } from "react-router-dom";
 import { BsHandbag } from "react-icons/bs";
 import { Logo } from "./Logo";

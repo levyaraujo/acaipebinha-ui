@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import * as S from "./card.style";
+import * as S from "./styles";
 import { Image } from "../Image";
 import { Title } from "./Title";
 import { Description } from "./Description";

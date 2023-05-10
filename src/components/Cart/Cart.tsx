@@ -1,16 +1,17 @@
 import { motion } from "framer-motion";
-import * as S from "./cart.style";
+import * as S from "./styles";
 import { CartContext } from "./cart.context";
-import { FunctionComponent, useContext } from "react";
+import { FunctionComponent, useContext, useState } from "react";
 import { Image } from "../Image";
-import { Quantity } from "./QuantityButton";
+import { QuantityButton } from "./QuantityButton";
 import { sizes } from "../../interfaces/Sizes";
 import { Line } from "../Line";
+import { DeleteButton } from "../DeleteButton";
 
 export const Cart: FunctionComponent = () => {
   const { cartItems } = useContext(CartContext);
   const total = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (totalPrice, item) => totalPrice + item.price * item.quantity,
     0
   );
 
@@ -40,7 +41,8 @@ export const Cart: FunctionComponent = () => {
                   <S.Title>{item.name}</S.Title>
                 </S.Description>
                 <S.Size>{sizes[item.price]} ml</S.Size>
-                <Quantity item={item} />
+                <QuantityButton item={item} />
+                <DeleteButton item={item} />
                 <S.Price>R${item.price * item.quantity},00</S.Price>
               </S.CartItem>
               <Line />

@@ -1,4 +1,4 @@
-import * as S from "./products.style";
+import * as S from "./styles";
 import { Card, CardProps } from "../ProductCard/Card";
 import { motion } from "framer-motion";
 import { FunctionComponent, useEffect, useState } from "react";

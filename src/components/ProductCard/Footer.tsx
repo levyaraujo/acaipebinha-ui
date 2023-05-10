@@ -1,5 +1,5 @@
 import { FunctionComponent, useState, ChangeEvent } from "react";
-import * as S from "./card.style";
+import * as S from "./styles";
 import {
   Box,
   TextField,

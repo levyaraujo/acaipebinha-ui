@@ -43,7 +43,7 @@ interface QuantityProps {
   item: CartItem;
 }
 
-export const Quantity: FunctionComponent<QuantityProps> = ({ item }) => {
+export const QuantityButton: FunctionComponent<QuantityProps> = ({ item }) => {
   const { increaseQuantity, decreaseQuantity, onChange } =
     useContext(CartContext);
 

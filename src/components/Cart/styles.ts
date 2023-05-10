@@ -1,4 +1,15 @@
-import { styled } from "styled-components";
+import { styled, keyframes } from "styled-components";
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+    height: auto;
+  }
+  to {
+    opacity: 0;
+    height: 0;
+  }
+`;
 
 export const Title = styled.h2`
   font-size: 1.3rem;
@@ -19,6 +30,13 @@ export const Cart = styled.div`
   width: 50%;
   margin: 5rem auto;
   border: 1px solid #e0e0e0;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+  }
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -43,6 +61,10 @@ export const CartItem = styled.div`
     justify-content: center;
     max-width: 90%;
     gap: 1.5rem;
+  }
+
+  &.removing {
+    animation: ${fadeOut} 0.5s ease-in-out;
   }
 `;
 
