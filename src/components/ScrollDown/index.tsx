@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 
 export const ScrollDown: FunctionComponent = () => {
   const handleClick = () => {
-    window.scrollBy({ top: 600, behavior: "smooth" });
+    window.scrollBy({ top: 550, behavior: "smooth" });
   };
 
   return (

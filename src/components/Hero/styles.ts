@@ -33,7 +33,7 @@ export const HeroTitle = styled.h1`
 
   @media (max-width: 768px) {
     font-size: 2rem;
-    content: "";
+    max-width: 90vw;
   }
 
   span {

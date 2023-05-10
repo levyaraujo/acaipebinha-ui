@@ -5,7 +5,7 @@ export const Products = styled.div`
   grid-template-areas: "a a a";
   max-width: 70%;
   margin: 5rem auto;
-  grid-gap: 1rem;
+  gap: 2.5rem;
   text-align: center;
   justify-content: center;
 
