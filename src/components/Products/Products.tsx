@@ -3,7 +3,7 @@ import { Card, CardProps } from "../ProductCard/Card";
 import { motion } from "framer-motion";
 import { FunctionComponent, useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
-
+import { Hero } from "../Hero";
 export const Products: FunctionComponent = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -36,6 +36,7 @@ export const Products: FunctionComponent = () => {
           }}
           exit={{ opacity: 0 }}
         >
+          <Hero />
           <S.Products>
             {products.map((product: CardProps) => (
               <Card

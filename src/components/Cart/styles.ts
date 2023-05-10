@@ -13,7 +13,7 @@ const fadeOut = keyframes`
 
 export const Title = styled.h2`
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #3a3d42;
   margin-left: 0.8rem;
 

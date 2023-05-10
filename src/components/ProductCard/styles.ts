@@ -9,6 +9,7 @@ export const Card = styled.div`
   color: #212529;
   border: 1px solid #d9d9d9;
   text-align: left;
+  background-color: #fff;
 
   &:hover {
     box-shadow: #d9d9d9 10px 10px 20px;

@@ -14,6 +14,11 @@ export const Navbar = styled.nav`
   top: 0;
   box-sizing: border-box;
 
+  @media (max-width: 1000px) {
+    max-width: 1000px; /* adjust for scrollbar */
+    overflow-x: hidden;
+  }
+
   @media (max-width: 768px) {
     max-width: 768px; /* adjust for scrollbar */
     overflow-x: hidden;

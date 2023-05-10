@@ -5,7 +5,7 @@ import { FunctionComponent, useContext } from "react";
 import { Image } from "../Image";
 import { QuantityButton } from "./QuantityButton";
 import { sizes } from "../../interfaces/Sizes";
-import { Line } from "../Line";
+import { Divider } from "@mui/material";
 import { DeleteButton } from "../DeleteButton";
 
 export const Cart: FunctionComponent = () => {
@@ -45,7 +45,7 @@ export const Cart: FunctionComponent = () => {
                 <DeleteButton item={item} />
                 <S.Price>R${item.price * item.quantity},00</S.Price>
               </S.CartItem>
-              <Line />
+              <Divider />
             </>
           ))}
           <S.TotalContainer>
