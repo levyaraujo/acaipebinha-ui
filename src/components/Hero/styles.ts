@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled, keyframes } from "styled-components";
 
 export const Hero = styled.section`
   display: flex;
@@ -22,6 +22,17 @@ export const Hero = styled.section`
   }
 `;
 
+const cascadeAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 export const HeroTitle = styled.h1`
   color: #fff;
   font-size: 3rem;
@@ -30,6 +41,9 @@ export const HeroTitle = styled.h1`
   z-index: 1;
   max-width: 60rem;
   font-weight: 800;
+  animation: ${cascadeAnimation} 0.3s ease-out;
+  animation-fill-mode: backwards;
+  animation-delay: 0.5s;
 
   @media (max-width: 768px) {
     font-size: 2rem;

@@ -28,10 +28,9 @@ export const Products: FunctionComponent = () => {
         </S.Products>
       ) : (
         <motion.div
-          initial={{ opacity: 0, transform: "translateX(-100%)" }}
+          initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
-            transform: "translateX(0%)",
             transition: { duration: 0.5 },
           }}
           exit={{ opacity: 0 }}
