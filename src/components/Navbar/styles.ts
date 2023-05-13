@@ -14,13 +14,8 @@ export const Navbar = styled.nav`
   top: 0;
   box-sizing: border-box;
 
-  @media (max-width: 1000px) {
-    max-width: 1000px; /* adjust for scrollbar */
-    overflow-x: hidden;
-  }
-
   @media (max-width: 768px) {
-    max-width: 768px; /* adjust for scrollbar */
+    max-width: 100vw;
     overflow-x: hidden;
   }
 `;
@@ -39,19 +34,4 @@ export const CartIcon = styled.h1`
   align-items: center;
   background-color: transparent;
   border: none;
-`;
-
-export const ItemCounter = styled.span`
-  color: #4e41d9;
-  font-weight: 700;
-  font-size: 0.8rem;
-  position: absolute;
-  background-color: white;
-  width: 1.3rem;
-  height: 1.3rem;
-  top: 3rem;
-  border-radius: 50%;
-  text-align: center;
-  margin-left: 1.8rem;
-  line-height: 1.3rem;
 `;

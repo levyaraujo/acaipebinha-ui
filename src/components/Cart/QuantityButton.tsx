@@ -6,30 +6,32 @@ import { CartItem } from "./cart.context";
 import { CartContext } from "./cart.context";
 
 const Button = styled.button`
-  background-color: #f8f9fa;
+  background-color: transparent;
   border: none;
   width: 2rem;
   height: 2rem;
-  border-radius: 0.5rem;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #4e41d9;
 `;
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #e6e5e5;
+  border-radius: 0.4rem;
 `;
 
 const Input = styled.input`
-  width: 4rem;
+  max-width: 1rem;
   height: 2rem;
   border: none;
-  border-radius: 0.5rem;
+  background-color: transparent;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
   margin: 0;
   &::-webkit-outer-spin-button,
@@ -52,7 +54,7 @@ export const QuantityButton: FunctionComponent<QuantityProps> = ({ item }) => {
       <Button>
         <RemoveOutlinedIcon onClick={() => decreaseQuantity(item)} />
       </Button>
-      <Input type="number" value={item.quantity} onChange={onChange}></Input>
+      <Input type="text" disabled value={item.quantity} onChange={onChange} />
       <Button onClick={() => increaseQuantity(item)}>
         <AddOutlinedIcon />
       </Button>

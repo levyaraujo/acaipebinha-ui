@@ -5,7 +5,8 @@ export const Hero = () => {
   return (
     <S.Hero>
       <S.HeroTitle>
-        A melhor açaiteria de Parauapebas. <span>Conheça nossos sabores</span>
+        Encontre o açaí perfeito para qualquer hora do dia.{" "}
+        <span>Experimente nossos sabores</span>
       </S.HeroTitle>
       <ScrollDown />
     </S.Hero>

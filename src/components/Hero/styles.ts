@@ -39,7 +39,7 @@ export const HeroTitle = styled.h1`
   text-align: center;
   margin-bottom: 1rem;
   z-index: 1;
-  max-width: 60rem;
+  max-width: 80rem;
   font-weight: 800;
   animation: ${cascadeAnimation} 0.3s ease-out;
   animation-fill-mode: backwards;

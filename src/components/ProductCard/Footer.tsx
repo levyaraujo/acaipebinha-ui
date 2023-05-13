@@ -74,10 +74,15 @@ export const Footer: FunctionComponent<FooterProps> = ({
     <CartProvider>
       <ThemeProvider theme={theme}>
         <S.CardFooter>
+          <S.Price>
+            {" "}
+            <span>R$</span> {prices[size]},00
+          </S.Price>
           <Box>
             <TextField
               label="Tamanho"
               select
+              size="small"
               value={size}
               onChange={handleChange}
               SelectProps={{ MenuProps: { disableScrollLock: true } }}
@@ -91,21 +96,16 @@ export const Footer: FunctionComponent<FooterProps> = ({
           </Box>
           <Button
             variant="contained"
-            size="large"
-            disableElevation
+            size="small"
             style={{
-              display: "flex",
-              justifyContent: "space-around",
-              padding: "5px",
-              width: "40%",
-              height: "56px",
+              maxWidth: "0.5rem",
+              padding: "0.2rem",
             }}
             onClick={() => {
               handleAddItem();
             }}
           >
             <MdAddShoppingCart size={25} />
-            R${prices[size]},00
           </Button>
         </S.CardFooter>
       </ThemeProvider>

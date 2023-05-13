@@ -53,9 +53,7 @@ export const Cart: FunctionComponent = () => {
             <S.Total>R${total},00</S.Total>
           </S.TotalContainer>
         </S.Cart>
-      ) : (
-        <h1>Sua sacola está vazia 😔. Adicione itens</h1>
-      )}
+      ) : null}
     </motion.div>
   );
 };

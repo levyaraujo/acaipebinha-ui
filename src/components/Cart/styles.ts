@@ -97,11 +97,6 @@ export const Price = styled.h4`
   font-size: 1.2rem;
   font-weight: 500;
   color: #50a773;
-
-  @media (max-width: 768px) {
-    display: inline;
-    font-size: 1.3rem;
-  }
 `;
 
 export const TotalContainer = styled.div`

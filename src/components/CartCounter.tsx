@@ -5,11 +5,12 @@ import { CartContext } from "./Cart/cart.context";
 export const Counter = styled.span`
   color: #000;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   position: absolute;
   background-color: white;
   width: 1rem;
   max-height: 1rem;
+  font-family: "Poppins", sans-serif;
   top: 43px;
   border-radius: 50%;
   text-align: center;
