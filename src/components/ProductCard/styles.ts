@@ -13,7 +13,7 @@ export const Card = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #3a3d42;
 `;
@@ -34,7 +34,7 @@ export const Price = styled.h1`
   color: #3a3d42;
 
   span {
-    font-size: 1rem;
+    font-size: .9rem;
     font-weight: 400;
     color: #3a3d42;
     margin-right: -0.3rem;
@@ -45,7 +45,7 @@ export const CardBody = styled.div`
   width: ${CARD_WIDTH};
   height: 8.969rem;
   color: #212529;
-  padding: 0 1.2rem;
+  padding: .5rem 1.2rem;
 `;
 
 export const CardFooter = styled.div`
