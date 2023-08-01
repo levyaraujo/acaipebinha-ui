@@ -96,10 +96,9 @@ export const Footer: FunctionComponent<FooterProps> = ({
           </Box>
           <Button
             variant="contained"
-            size="small"
+            size="large"
             style={{
-              maxWidth: "0.5rem",
-              padding: "0.2rem",
+              gridArea: "c"
             }}
             onClick={() => {
               handleAddItem();

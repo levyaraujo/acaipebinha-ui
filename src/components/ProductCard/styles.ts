@@ -53,9 +53,10 @@ export const CardFooter = styled.div`
   display: grid;
   grid-template-areas:
     "a a"
-    ". c";
+    "c c"; /* Update the grid template areas to make "c" take up the whole width */
   gap: 0.5rem;
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem;
 `;
+

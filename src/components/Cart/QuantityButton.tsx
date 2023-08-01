@@ -8,8 +8,8 @@ import { CartContext } from "./cart.context";
 const Button = styled.button`
   background-color: transparent;
   border: none;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   cursor: pointer;
   display: flex;
   justify-content: center;
